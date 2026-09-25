@@ -6,7 +6,7 @@ export const siteConfig = {
   description: 'Design, direção de arte, branding, fotografia e vídeo. Portfólio de Pedro Vileira.', // ✏️ PEDRO: ALTERE A DESCRIÇÃO (SEO)
   bio: 'Desenho marcas, campanhas e sistemas visuais. Fotografo e edito o que desenho. Trabalho na distância entre a ideia e a peça final.', // ✏️ PEDRO: ALTERE SUA BIO AQUI
   location: 'SÃO PAULO, BR', // ✏️ PEDRO: ALTERE SUA LOCALIZAÇÃO AQUI
-  email: 'pedrovileirax@gmil.com', // ✏️ PEDRO: ALTERE O E-MAIL AQUI
+  email: 'pedrovileirax@gmail.com', // ✏️ PEDRO: ALTERE O E-MAIL AQUI
   instagram: 'https://instagram.com/pdrovileira', // ✏️ PEDRO: ALTERE O LINK DO INSTAGRAM AQUI
   linkedin: '', // ✏️ PEDRO: SEU LINKEDIN (deixe '' se ainda não tiver — some do site sozinho)
   behance: '', // ✏️ PEDRO: SEU BEHANCE (deixe '' se ainda não tiver — some do site sozinho)
