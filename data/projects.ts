@@ -31,7 +31,7 @@ export const projects: Project[] = [
     result: 'Substitua pelo resultado do projeto.', services: ['Art Direction', 'Campaign'], tools, client: 'Cliente', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('safra') },
   { id: 6, slug: 'personal-work', title: 'PERSONAL WORK', subtitle: 'Fotografia e experimentos', category: 'PHOTOGRAPHY / EXPERIMENTAL', year: '2026',
     description: 'Trabalhos autorais de fotografia e experimentação visual.', shortDescription: 'Fotografia e experimentação visual.',
-    services: ['Photography', 'Experimental'], tools: ['Lightroom', 'Photoshop'], client: 'Autoral', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('personal-work') },
+    result: 'Substitua pelo texto final.', services: ['Photography', 'Experimental'], tools: ['Lightroom', 'Photoshop'], client: 'Autoral', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('personal-work') },
 ];
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
 export const getNext = (slug: string) => projects[(projects.findIndex((p) => p.slug === slug) + 1) % projects.length];
