@@ -61,8 +61,8 @@ export function WorkList({ projects }: { projects: Project[] }) {
         <div className="wl-preview__in">
           {/* 🖼️ PEDRO — a capa vem de coverImage em data/projects.ts */}
           {projects.map((p, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-                        <img key={p.slug} src={p.hoverImage} alt="" className={i === last ? 'is-active' : ''} onError={(e) => { const t = e.currentTarget; if (t.dataset.fb) { t.style.visibility = 'hidden'; } else { t.dataset.fb = '1'; t.src = p.coverImage; } }} />
+           // eslint-disable-next-line @next/next/no-img-element
+          <img key={p.slug} src={p.hoverImage} alt="" className={i === last ? 'is-active' : ''} onError={(e) => { const t = e.currentTarget; if (t.dataset.fb) { t.style.visibility = 'hidden'; } else { t.dataset.fb = '1'; t.src = p.coverImage; } }} />
         </div>
       </div>
     </>
