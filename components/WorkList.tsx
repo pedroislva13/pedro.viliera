@@ -62,8 +62,7 @@ export function WorkList({ projects }: { projects: Project[] }) {
           {/* 🖼️ PEDRO — a capa vem de coverImage em data/projects.ts */}
           {projects.map((p, i) => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={p.slug} src={p.coverImage} alt="" className={i === last ? 'is-active' : ''} onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }} />
-          ))}
+                        <img key={p.slug} src={p.hoverImage} alt="" className={i === last ? 'is-active' : ''} onError={(e) => { const t = e.currentTarget; if (t.dataset.fb) { t.style.visibility = 'hidden'; } else { t.dataset.fb = '1'; t.src = p.coverImage; } }} />
         </div>
       </div>
     </>
