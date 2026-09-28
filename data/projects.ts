@@ -1,12 +1,11 @@
 export type Project = {
   id: number; slug: string; title: string; subtitle: string; category: string; year: string;
   description: string; shortDescription: string; result: string;
-  coverImage: string; heroImage: string; images: string[]; videos: string[];
-  services: string[]; tools: string[]; client: string; credits: string[]; color: string; featured: boolean;
+  coverImage: string; hoverImage: string; heroImage: string; images: string[]; videos: string[];
 };
 // 🖼️ PEDRO — SUBSTITUA PELOS ARQUIVOS REAIS: /public/images/projects/<slug>/cover.jpg, hero.jpg, 01.jpg ... 05.jpg
 const media = (slug: string) => ({
-  coverImage: `/images/projects/${slug}/cover.jpg`,
+    hoverImage: `/images/projects/${slug}/hover.jpg`, // 🖼️ PEDRO — foto só do preview da página Work (proporção 4:5, ex: 800x1000px)
   heroImage: `/images/projects/${slug}/hero.jpg`,
   images: [1, 2, 3, 4, 5].map((n) => `/images/projects/${slug}/0${n}.jpg`), // ✏️ PEDRO: ADICIONE NOVAS IMAGENS AQUI
   videos: [] as string[], // ✏️ PEDRO: ADICIONE VÍDEOS (.mp4) AQUI, ex: '/videos/colinas/reel.mp4'
