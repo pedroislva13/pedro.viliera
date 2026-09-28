@@ -5,10 +5,10 @@ import { CURSOR_LERP } from '@/config/motion';
 import { prefersReducedMotion } from '@/lib/hooks';
 import { TransitionLink } from './TransitionLink';
 
-// Lista da página /work. No desktop, a capa do projeto aparece no lugar do mouse ao passar sobre o nome.
+// Lista da página /work. No desktop, a foto do projeto aparece no lugar do mouse ao passar sobre o nome.
 export function WorkList({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState<number | null>(null); // qual linha está com o mouse em cima
-  const [last, setLast] = useState(0); // última capa mostrada (evita piscar ao sair)
+  const [last, setLast] = useState(0); // última foto mostrada (evita piscar ao sair)
   const box = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -59,10 +59,11 @@ export function WorkList({ projects }: { projects: Project[] }) {
       </ul>
       <div ref={box} className={`wl-preview ${active !== null ? 'is-on' : ''}`} aria-hidden="true">
         <div className="wl-preview__in">
-          {/* 🖼️ PEDRO — a capa vem de coverImage em data/projects.ts */}
+          {/* 🖼️ PEDRO — a foto vem de hoverImage em data/projects.ts (se não existir, usa a capa) */}
           {projects.map((p, i) => (
-           // eslint-disable-next-line @next/next/no-img-element
-                      <img key={p.slug} src={p.hoverImage} alt="" className={i === last ? 'is-active' : ''} onError={(e) => { const t = e.currentTarget; if (t.dataset.fb) { t.style.visibility = 'hidden'; } else { t.dataset.fb = '1'; t.src = p.coverImage; } }} />
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={p.slug} src={p.hoverImage} alt="" className={i === last ? 'is-active' : ''} onError={(e) => { const t = e.currentTarget; if (t.dataset.fb) { t.style.visibility = 'hidden'; } else { t.dataset.fb = '1'; t.src = p.coverImage; } }} />
+          ))}
         </div>
       </div>
     </>
