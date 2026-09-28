@@ -136,3 +136,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .js .tr__in, .js .ir__in { transform: none; } .js .ir { clip-path: inset(0); }
 }
+
+/* ===== PREVIEW DA CAPA NA PÁGINA WORK ===== */
+/* Cursor some quando a capa aparece (a capa "vira" o cursor) */
+.cursor[data-state='image'] .cursor__dot { transform: scale(0); }
+.wl-preview { position: fixed; top: 0; left: 0; z-index: var(--z-menu); pointer-events: none; }
+.wl-preview__in { position: absolute; width: min(22vw, 22rem); aspect-ratio: 4 / 5; transform: translate(-50%, -50%); overflow: hidden; background: #151515; clip-path: inset(50% 0 50% 0); transition: clip-path var(--dur-fast) var(--ease); } /* 🎨 PEDRO: tamanho da capa = width acima */
+.wl-preview.is-on .wl-preview__in { clip-path: inset(0); }
+.wl-preview__in img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
+.wl-preview__in img.is-active { opacity: 1; }
+@media (hover: none), (pointer: coarse) { .wl-preview { display: none; } }
