@@ -136,7 +136,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .js .tr__in, .js .ir__in { transform: none; } .js .ir { clip-path: inset(0); }
 }
-
 /* ===== PREVIEW DA CAPA NA PÁGINA WORK ===== */
 /* Cursor some quando a capa aparece (a capa "vira" o cursor) */
 .cursor[data-state='image'] .cursor__dot { transform: scale(0); }
