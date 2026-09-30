@@ -145,3 +145,31 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .wl-preview__in img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
 .wl-preview__in img.is-active { opacity: 1; }
 @media (hover: none), (pointer: coarse) { .wl-preview { display: none; } }
+
+/* ===== ADESIVOS DO HERO (PENSE / CRIE / FLUA) — só decoram o nome na Home ===== */
+.hero__name { position: relative; } /* âncora para os adesivos flutuarem ao redor do nome, sem mudar o layout do hero */
+.sticker {
+  position: absolute;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.6vw, 1.35rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  border: 2px solid var(--color-background);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  pointer-events: none; /* decorativo — não interfere no clique/scroll do hero */
+  white-space: nowrap;
+}
+/* 🎨 PEDRO — troque a cor de cada adesivo aqui */
+.sticker--a { background: #ffce45; color: #060606; top: -6%; left: 2%; transform: rotate(-9deg); }
+.sticker--b { background: #ff4d6d; color: #fff; top: 38%; right: -2%; transform: rotate(6deg); }
+.sticker--c { background: #4dd0ff; color: #060606; bottom: -8%; left: 22%; transform: rotate(-4deg); }
+@media (max-width: 767px) {
+  /* Em telas pequenas os adesivos encolhem e chegam mais perto do nome, sem cobrir o texto */
+  .sticker { font-size: 0.7rem; padding: 0.4em 0.8em; }
+  .sticker--a { top: -4%; left: 0; }
+  .sticker--b { top: 42%; right: 0; }
+  .sticker--c { bottom: -6%; left: 8%; }
+}
