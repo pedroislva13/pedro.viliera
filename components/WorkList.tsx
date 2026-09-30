@@ -1,71 +1,39 @@
-'use client';
-import { useEffect, useRef, useState } from 'react';
-import { pad, type Project } from '@/data/projects';
-import { CURSOR_LERP } from '@/config/motion';
-import { prefersReducedMotion } from '@/lib/hooks';
-import { TransitionLink } from './TransitionLink';
-
-// Lista da página /work. No desktop, a foto do projeto aparece no lugar do mouse ao passar sobre o nome.
-export function WorkList({ projects }: { projects: Project[] }) {
-  const [active, setActive] = useState<number | null>(null); // qual linha está com o mouse em cima
-  const [last, setLast] = useState(0); // última foto mostrada (evita piscar ao sair)
-  const box = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = box.current;
-    if (!el || !matchMedia('(hover: hover) and (pointer: fine)').matches) return; // mobile: sem preview
-    const lerp = prefersReducedMotion() ? 1 : CURSOR_LERP; // ⚡ PEDRO: velocidade de seguir o mouse (vem de config/motion.ts)
-    let tx = 0, ty = 0, x = 0, y = 0, first = true, raf = 0;
-    const move = (e: MouseEvent) => {
-      tx = e.clientX; ty = e.clientY;
-      if (first) { x = tx; y = ty; first = false; }
-    };
-    const loop = () => {
-      x += (tx - x) * lerp; y += (ty - y) * lerp;
-      el.style.transform = `translate3d(${x}px,${y}px,0)`;
-      raf = requestAnimationFrame(loop);
-    };
-    addEventListener('mousemove', move);
-    raf = requestAnimationFrame(loop);
-    return () => { removeEventListener('mousemove', move); cancelAnimationFrame(raf); };
-  }, []);
-
-  const show = (i: number) => { setActive(i); setLast(i); };
-  const hide = () => setActive(null);
-
-  return (
-    <>
-      <ul className="rows">
-        {projects.map((p, i) => (
-          <li key={p.slug}>
-            <TransitionLink
-              href={`/work/${p.slug}`}
-              label={p.title}
-              className="row"
-              data-cursor="image"
-              onMouseEnter={() => show(i)}
-              onMouseLeave={hide}
-              onFocus={() => show(i)}
-              onBlur={hide}
-              onNavigate={hide}
-            >
-              <span className="t-micro">{pad(i + 1)}</span>
-              <span className="row__t t-headline">{p.title}</span>
-              <span className="t-micro">{p.category.split(' / ')[0]}</span>
-              <span className="t-micro">{p.year}</span>
-            </TransitionLink>
-          </li>
-        ))}
-      </ul>
-      <div ref={box} className={`wl-preview ${active !== null ? 'is-on' : ''}`} aria-hidden="true">
-        <div className="wl-preview__in">
-          {/* 🖼️ PEDRO — a foto vem de hoverImage em data/projects.ts (se não existir, usa a capa) */}
-          {projects.map((p, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={p.slug} src={p.hoverImage} alt="" className={i === last ? 'is-active' : ''} onError={(e) => { const t = e.currentTarget; if (t.dataset.fb) { t.style.visibility = 'hidden'; } else { t.dataset.fb = '1'; t.src = p.coverImage; } }} />
-          ))}
-        </div>
-      </div>
-    </>
-  );
-}
+export type Project = {
+  id: number; slug: string; title: string; subtitle: string; category: string; year: string;
+  description: string; shortDescription: string; result: string;
+  coverImage: string; hoverImage: string; heroImage: string; images: string[]; videos: string[];
+  services: string[]; tools: string[]; client: string; credits: string[]; color: string; featured: boolean;
+};
+// 🖼️ PEDRO — SUBSTITUA PELOS ARQUIVOS REAIS: /public/images/projects/<slug>/cover.jpg, hero.jpg, 01.jpg ... 05.jpg
+const media = (slug: string) => ({
+  coverImage: `/images/projects/${slug}/cover.jpg`,
+  hoverImage: `/images/projects/${slug}/hover.jpg`, // 🖼️ PEDRO — foto só do preview da página Work (proporção 4:5, ex: 800x1000px)
+  heroImage: `/images/projects/${slug}/hero.jpg`,
+  images: [1, 2, 3, 4, 5].map((n) => `/images/projects/${slug}/0${n}.jpg`), // ✏️ PEDRO: ADICIONE NOVAS IMAGENS AQUI
+  videos: [] as string[], // ✏️ PEDRO: ADICIONE VÍDEOS (.mp4) AQUI, ex: '/videos/colinas/reel.mp4'
+});
+const tools = ['Photoshop', 'Illustrator', 'Figma'];
+// ✏️ PEDRO — PROJETOS DE EXEMPLO. Edite, apague ou duplique. A ordem aqui é a ordem no site.
+export const projects: Project[] = [
+  { id: 1, slug: 'colinas-imoveis', title: 'COLINAS IMÓVEIS', subtitle: 'Direção visual para o mercado imobiliário', category: 'ART DIRECTION / SOCIAL MEDIA / REAL ESTATE', year: '2026',
+    description: 'Projeto de direção visual e comunicação digital para o mercado imobiliário.', shortDescription: 'Direção visual e comunicação digital para o mercado imobiliário.',
+    result: 'Substitua por resultados reais: alcance, engajamento, leads.', services: ['Art Direction', 'Graphic Design', 'Social Media', 'Photography'], tools, client: 'Colinas Imóveis', credits: ['Pedro Vileira — Art Direction'], color: '#5563ff', featured: true, ...media('colinas') },
+  { id: 2, slug: 'toto', title: 'TOTÓ', subtitle: 'Aplicativo para tutores de cães', category: 'BRANDING / PRODUCT DESIGN / UI', year: '2026',
+    description: 'Conceito de aplicativo voltado para tutores de cães, com experiência personalizada para cada pet.', shortDescription: 'App conceito com experiência personalizada para cada pet.',
+    result: 'Substitua pelo resultado do projeto.', services: ['Branding', 'Product Design', 'UI'], tools, client: 'Projeto autoral', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('toto') },
+  { id: 3, slug: 'eleve', title: 'ALL ONE', subtitle: 'Identidade de marca', category: 'BRAND IDENTITY / ART DIRECTION', year: '2026',
+    description: 'Descrição do projeto ALL ONE.', shortDescription: 'Identidade de marca e direção de arte.',
+    result: 'Substitua pelo resultado do projeto.', services: ['Brand Identity', 'Art Direction'], tools, client: 'Cliente', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('eleve') },
+  { id: 4, slug: 'raiz', title: 'RAIZ', subtitle: 'Branding e digital', category: 'BRANDING / DIGITAL', year: '2026',
+    description: 'Descrição do projeto RAIZ.', shortDescription: 'Branding e presença digital.',
+    result: 'Substitua pelo resultado do projeto.', services: ['Branding', 'Digital'], tools, client: 'Cliente', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('raiz') },
+  { id: 5, slug: 'safra', title: 'SAFRA', subtitle: 'Campanha', category: 'ART DIRECTION / CAMPAIGN', year: '2026',
+    description: 'Descrição do projeto SAFRA.', shortDescription: 'Direção de arte e campanha.',
+    result: 'Substitua pelo resultado do projeto.', services: ['Art Direction', 'Campaign'], tools, client: 'Cliente', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('safra') },
+  { id: 6, slug: 'personal-work', title: 'PERSONAL WORK', subtitle: 'Fotografia e experimentos', category: 'PHOTOGRAPHY / EXPERIMENTAL', year: '2026',
+    description: 'Trabalhos autorais de fotografia e experimentação visual.', shortDescription: 'Fotografia e experimentação visual.',
+    result: 'Substitua pelo texto final.', services: ['Photography', 'Experimental'], tools: ['Lightroom', 'Photoshop'], client: 'Autoral', credits: ['Pedro Vileira'], color: '#5563ff', featured: true, ...media('personal-work') },
+];
+export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+export const getNext = (slug: string) => projects[(projects.findIndex((p) => p.slug === slug) + 1) % projects.length];
+export const pad = (n: number) => String(n).padStart(2, '0');
