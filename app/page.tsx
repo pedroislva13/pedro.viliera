@@ -10,8 +10,14 @@ export default function Home() {
     <>
       <section className="hero">
         <div className="hero__row t-micro"><span>{siteConfig.role}</span><span>{siteConfig.location}</span><span>2026</span></div>
-        {/* ✏️ PEDRO: ALTERE SEU NOME AQUI (uma string por linha) */}
-        <TextReveal as="h1" lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
+                {/* ✏️ PEDRO: ALTERE SEU NOME AQUI (uma string por linha) */}
+        <div className="hero__name">
+          <TextReveal as="h1" lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
+          {/* ✏️ PEDRO: ALTERE O TEXTO OU AS CORES DOS ADESIVOS EM globals.css (.sticker--a/b/c) */}
+          <span className="sticker sticker--a" aria-hidden="true">PENSE</span>
+          <span className="sticker sticker--b" aria-hidden="true">CRIE</span>
+          <span className="sticker sticker--c" aria-hidden="true">FLUA</span>
+        </div>
         <div className="hero__row t-micro"><span>SCROLL TO EXPLORE ↓</span><span>SELECTED WORK (01–{String(featured.length).padStart(2, '0')})</span></div>
       </section>
       <section className="grid work" aria-label="Selected work">
