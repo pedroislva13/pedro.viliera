@@ -184,30 +184,56 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .sticker--c { bottom: -6%; left: 8%; }
 }
 
-/* ===== FORMULÁRIO DE ORÇAMENTO (página CONTACT) ===== */
-.qf-wrap { margin-top: var(--sp-5); max-width: 42rem; }
-.qf-wrap__title { color: var(--color-muted); margin-bottom: var(--sp-2); }
-.qf { display: flex; flex-direction: column; gap: var(--sp-2); }
-.qf__row { display: grid; grid-template-columns: 1fr; gap: var(--sp-2); }
-@media (min-width: 640px) { .qf__row { grid-template-columns: 1fr 1fr; } }
-.qf__field { display: flex; flex-direction: column; gap: 0.35rem; }
-.qf__field > span { color: var(--color-muted); }
-.qf input, .qf select, .qf textarea {
-  background: transparent; border: 0; border-bottom: 1px solid var(--color-line);
-  color: var(--color-text); font-family: var(--font-sans); font-size: var(--fs-body);
-  padding: 0.5em 0; border-radius: 0; resize: vertical; transition: border-color var(--dur-fast) var(--ease);
+/* ===== FORMULÁRIO DE ORÇAMENTO (página CONTACT) — layout editorial, grande, uma pergunta por vez ===== */
+.qform-wrap { margin-top: var(--sp-5); }
+.qform-wrap__title { color: var(--color-muted); margin-bottom: var(--sp-3); }
+.qform { display: flex; flex-direction: column; width: 100%; } /* ocupa toda a largura útil da seção (herdada de .page) */
+.qform__field { padding-block: var(--sp-4); border-bottom: 1px solid var(--color-line); display: flex; flex-direction: column; gap: var(--sp-2); }
+.qform__field:first-child { padding-top: 0; }
+/* 🎨 PEDRO — tamanho das perguntas grandes */
+.qform__q { font-family: var(--font-sans); font-weight: 700; font-size: clamp(1.5rem, 3.4vw, 2.6rem); line-height: 1.15; letter-spacing: -0.01em; max-width: 26ch; }
+.qform input, .qform select, .qform textarea {
+  background: transparent; border: 0; border-bottom: 1px solid var(--color-line); border-radius: 0;
+  color: var(--color-text); font-family: var(--font-sans); font-size: clamp(1.1rem, 2vw, 1.5rem);
+  padding: 0.6em 0; width: 100%; resize: none; transition: border-color var(--dur-fast) var(--ease);
 }
-.qf select { appearance: none; }
-.qf select option { background: var(--color-background); color: var(--color-text); }
-.qf input:focus, .qf select:focus, .qf textarea:focus { border-color: var(--color-accent); outline: none; }
-.qf__err { color: var(--color-accent); }
-.qf__bot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.qf__submit { align-self: flex-start; margin-top: var(--sp-2); padding: 0.9em 1.8em; border: 1px solid var(--color-text); border-radius: 999px; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
-.qf__submit:hover:not(:disabled) { background: var(--color-text); color: var(--color-background); }
-.qf__submit:disabled { opacity: 0.5; cursor: default; }
-.qf__done { padding-block: var(--sp-3); display: flex; flex-direction: column; gap: 0.4rem; }
-.qf__done .t-micro { color: var(--color-muted); }
+.qform select { appearance: none; }
+.qform select option { background: var(--color-background); color: var(--color-text); }
+.qform input:focus, .qform select:focus, .qform textarea:focus { border-color: var(--color-accent); outline: none; }
+.qform__briefing { min-height: 14rem; } /* campo de briefing bem maior que os demais */
+.qform__textarea-sm { min-height: 6rem; }
+.qform__secondary { font-size: var(--fs-subtitle); color: var(--color-muted); margin-top: var(--sp-1); }
+.qform__sub { display: grid; grid-template-columns: 1fr; gap: var(--sp-3); margin-top: var(--sp-1); }
+@media (min-width: 640px) { .qform__sub { grid-template-columns: 1fr 1fr; } }
+.qform__subfield { display: flex; flex-direction: column; gap: 0.4rem; }
+.qform__subfield > span { color: var(--color-muted); }
+.qform__err { color: var(--color-accent); }
+.qform__bot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.qform__submit {
+  align-self: flex-start; margin-top: var(--sp-4); padding: 1.1em 2.4em;
+  font-family: var(--font-sans); font-weight: 700; font-size: clamp(1rem, 1.6vw, 1.25rem); letter-spacing: 0.02em; text-transform: uppercase;
+  border: 1px solid var(--color-text); border-radius: 999px; color: var(--color-text);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.qform__submit:hover:not(:disabled) { background: var(--color-text); color: var(--color-background); transform: translateX(0.3rem); }
+.qform__submit:disabled { opacity: 0.5; cursor: default; }
+@media (max-width: 767px) { .qform__submit { align-self: stretch; text-align: center; } }
+.qform__done { padding-block: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); }
 
-/* ===== CAOS TIPOGRÁFICO — título "LET'S WORK TOGETHER." no CONTACT ===== */
-.chaos__ch { display: inline-block; transition: transform 0.25s var(--ease), color 0.25s var(--ease); }
-.chaos__ch.is-chaos { transform: rotate(var(--r, 0deg)) scale(var(--s, 1)); }
+/* ===== CAOS TIPOGRÁFICO — "LET'S WORK TOGETHER." no CONTACT =====
+   Cada letra é um <span> independente. O hover do navegador (:hover) já isola o efeito
+   automaticamente na letra sob o mouse — as outras nunca são afetadas, sem necessidade de JS. */
+.chaos__ch { display: inline-block; position: relative; transition: color 0.2s var(--ease), transform 0.2s var(--ease); }
+.chaos__ch:hover { color: var(--cc); font-family: var(--cf); transform: rotate(var(--r)) scale(var(--s)); }
+.chaos__ch[data-glyph]:hover { color: transparent; } /* esconde a letra real para dar lugar ao símbolo */
+.chaos__ch[data-glyph]::after {
+  content: attr(data-glyph); position: absolute; inset: 0;
+  color: var(--cc); font-family: var(--cf); opacity: 0;
+  transform: rotate(var(--r)) scale(var(--s)); pointer-events: none;
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.chaos__ch[data-glyph]:hover::after { opacity: 1; }
+/* Prévia automática no mobile (dispara uma vez, simula o hover em todas as letras com leve ritmo) */
+.is-chaos-preview .chaos__ch { color: var(--cc); font-family: var(--cf); transform: rotate(var(--r)) scale(var(--s)); transition-delay: var(--d, 0ms); }
+.is-chaos-preview .chaos__ch[data-glyph] { color: transparent; }
+.is-chaos-preview .chaos__ch[data-glyph]::after { opacity: 1; transition-delay: var(--d, 0ms); }
