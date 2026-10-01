@@ -9,6 +9,7 @@ import { Loader } from '@/components/Loader';
 import { Cursor } from '@/components/Cursor';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 // ✏️ PEDRO: TROQUE A FONTE AQUI (qualquer fonte do Google Fonts) e ajuste --font-sans em globals.css
 const font = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
@@ -24,11 +25,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={font.variable} style={motionVars} suppressHydrationWarning>
-      <head><script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} /></head>
+      <head><script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js');try{if(localStorage.getItem('pv-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}" }} /></head>
       <body>
         <a href="#main" className="skip">Skip to content</a>
         <PageTransition>
-          <SmoothScroll /><Loader /><Cursor /><Navigation />
+          <SmoothScroll /><Loader /><Cursor /><Navigation /><ThemeToggle />
           <main id="main">{children}</main>
           <Footer />
         </PageTransition>
