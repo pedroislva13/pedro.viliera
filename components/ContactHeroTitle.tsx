@@ -19,14 +19,16 @@ const GLYPHS = ['Ж', 'ロ', '貝', 'ش', 'Ɵ', '大'];
 // Título do Contact. Cada letra é um <span> independente: o hover (via CSS :hover, sem JS) muda
 // SÓ a letra sob o mouse — as demais ficam intocadas. No celular, uma classe no título dispara
 // a mesma transformação em todas as letras uma única vez, simulando o hover (sem precisar de toque).
-export function ContactHeroTitle({ lines, className = '' }: { lines: string[]; className?: string }) {
-  const { ref, on } = useInView<HTMLHeadingElement>();
+export function ContactHeroTitle({ lines, className = '', wait = false }: { lines: string[]; className?: string; wait?: boolean }) {
+  // `wait` = espera o Loader terminar (usado no título da Home). Sem ele, o comportamento é o mesmo de antes.
+  const { ref, on } = useInView<HTMLHeadingElement>(wait);
   const [preview, setPreview] = useState(false);
   const [done, setDone] = useState(false);
+  const ready = !wait || on; // sem `wait` (Contact) vale sempre true: o efeito abaixo roda como antes
 
   useEffect(() => {
     const touch = !matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!touch || done) return;
+    if (!touch || done || !ready) return; // na Home, a prévia só começa depois que o título aparece
     // ⚡ PEDRO — tempo de espera e duração do easter egg no celular (ms)
     const t1 = setTimeout(() => setPreview(true), 700);
     const t2 = setTimeout(() => { setPreview(false); setDone(true); }, 1500);
