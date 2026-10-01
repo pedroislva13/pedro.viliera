@@ -208,6 +208,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .qform__subfield { display: flex; flex-direction: column; gap: 0.4rem; }
 .qform__subfield > span { color: var(--color-muted); }
 .qform__err { color: var(--color-accent); }
+/* Erro de campo: o campo recebe a cor de destaque e a mensagem entra suave (sem alert, sem caixa de sistema) */
+.qform [aria-invalid='true'] { border-color: var(--color-accent); }
+.qform__field .qform__err { animation: qform-err-in var(--dur-fast) var(--ease) both; }
+@keyframes qform-err-in { from { opacity: 0; transform: translateY(-0.4rem); } to { opacity: 1; transform: none; } }
 .qform__bot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .qform__submit {
   align-self: flex-start; margin-top: var(--sp-4); padding: 1.1em 2.4em;
@@ -223,16 +227,27 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* ===== CAOS TIPOGRÁFICO — "LET'S WORK TOGETHER." no CONTACT =====
    Cada letra é um <span> independente. O hover do navegador (:hover) já isola o efeito
    automaticamente na letra sob o mouse — as outras nunca são afetadas, sem necessidade de JS. */
-.chaos__ch { display: inline-block; position: relative; transition: color 0.2s var(--ease), transform 0.2s var(--ease); }
-.chaos__ch:hover { color: var(--cc); font-family: var(--cf); transform: rotate(var(--r)) scale(var(--s)); }
-.chaos__ch[data-glyph]:hover { color: transparent; } /* esconde a letra real para dar lugar ao símbolo */
-.chaos__ch[data-glyph]::after {
-  content: attr(data-glyph); position: absolute; inset: 0;
-  color: var(--cc); font-family: var(--cf); opacity: 0;
-  transform: rotate(var(--r)) scale(var(--s)); pointer-events: none;
-  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+/* ⚡ PEDRO — ajuste fino da microanimação (tempos em ms). Definidos por letra, valem para todas. */
+.chaos__ch {
+  --c-in-delay: 70ms;  /* espera antes da letra reagir ao mouse (ideal: 50–120ms) */
+  --c-in: 240ms;       /* duração da transformação ao entrar */
+  --c-out-delay: 60ms; /* espera antes de voltar ao estado original */
+  --c-out: 300ms;      /* duração da volta */
+  --c-soft: cubic-bezier(0.22, 1, 0.36, 1);   /* suave, sem arrancada */
+  --c-pop: cubic-bezier(0.34, 1.56, 0.64, 1); /* leve "reação" (overshoot) na escala/rotação */
+  display: inline-block; position: relative;
+  transition: color var(--c-out) var(--c-soft) var(--c-out-delay), transform var(--c-out) var(--c-soft) var(--c-out-delay);
 }
-.chaos__ch[data-glyph]:hover::after { opacity: 1; }
+/* A fonte não pode ser animada diretamente, então a letra "experimental" (outra fonte e cor) fica numa camada
+   sobreposta (::after) que faz crossfade com a letra original. A largura da letra não muda: as vizinhas não se mexem. */
+.chaos__ch::after {
+  content: attr(data-ch); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: var(--cc); font-family: var(--cf); opacity: 0; pointer-events: none;
+  transition: opacity var(--c-out) var(--c-soft) var(--c-out-delay);
+}
+.chaos__ch[data-glyph]::after { content: attr(data-glyph); transform: rotate(var(--r)) scale(var(--s)); } /* símbolo decorativo no lugar da letra */
+.chaos__ch:hover { color: transparent; transform: rotate(var(--r)) scale(var(--s)); transition: color var(--c-in) var(--c-soft) var(--c-in-delay), transform var(--c-in) var(--c-pop) var(--c-in-delay); }
+.chaos__ch:hover::after { opacity: 1; transition: opacity var(--c-in) var(--c-soft) var(--c-in-delay); }
 /* Prévia automática no mobile (dispara uma vez, simula o hover em todas as letras com leve ritmo) */
 .is-chaos-preview .chaos__ch { color: var(--cc); font-family: var(--cf); transform: rotate(var(--r)) scale(var(--s)); transition-delay: var(--d, 0ms); }
 .is-chaos-preview .chaos__ch[data-glyph] { color: transparent; }
