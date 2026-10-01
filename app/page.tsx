@@ -3,6 +3,7 @@ import { projects } from '@/data/projects';
 import { TextReveal } from '@/components/TextReveal';
 import { ProjectCard } from '@/components/ProjectCard';
 import { TransitionLink } from '@/components/TransitionLink';
+import { HeroStickers } from '@/components/HeroStickers';
 
 export default function Home() {
   const featured = projects.filter((p) => p.featured);
