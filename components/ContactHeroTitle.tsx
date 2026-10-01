@@ -55,7 +55,7 @@ export function ContactHeroTitle({ lines, className = '' }: { lines: string[]; c
                 ['--d' as string]: `calc(var(--stagger) * ${i} / 3)`,
               };
               return (
-                <span key={i} className="chaos__ch" style={style} data-glyph={glyph}>
+                <span key={i} className="chaos__ch" style={style} data-glyph={glyph} data-ch={ch}>
                   {ch}
                 </span>
               );
