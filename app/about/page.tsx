@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
-import { TextReveal } from '@/components/TextReveal';
-
+import { ContactHeroTitle } from '@/components/ContactHeroTitle';
 export const metadata: Metadata = { title: 'About', description: siteConfig.bio };
 
 export default function About() {
   return (
     <section className="page">
       {/* ✏️ PEDRO: ALTERE A FRASE PRINCIPAL AQUI */}
-      <TextReveal as="h1" lines={['Ideias que viram realidade.']} className="t-headline" />
+      <ContactHeroTitle lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
       <div className="grid about">
         <p className="t-subtitle c-half-l">{siteConfig.bio}</p>
         <div className="c-half-r about__cols t-caption">
