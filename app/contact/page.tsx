@@ -3,7 +3,7 @@ import { siteConfig, socials } from '@/config/site';
 import { ContactHeroTitle } from '@/components/ContactHeroTitle';
 import { QuoteForm } from '@/components/QuoteForm';
 
-export const metadata: Metadata = { title: 'Contact', description: 'Vamos criar. Fale com Pedro Vileira.' };
+export const metadata: Metadata = { title: 'Contact', description: 'Vamos criar? Fale com o Pedro.' };
 
 export default function Contact() {
   return (
