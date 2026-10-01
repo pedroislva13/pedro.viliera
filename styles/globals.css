@@ -251,3 +251,41 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* Prévia automática no mobile (dispara uma vez, simula o hover em todas as letras com leve ritmo) */
 .is-chaos-preview .chaos__ch { color: transparent; transform: rotate(var(--r)) scale(var(--s)); transition: color var(--c-in) var(--c-soft) var(--d, 0ms), transform var(--c-in) var(--c-pop) var(--d, 0ms); }
 .is-chaos-preview .chaos__ch::after { opacity: 1; transition: opacity var(--c-in) var(--c-soft) var(--d, 0ms); }
+
+
+/* ===== TEMA ESCURO / CLARO =====
+   O tema ESCURO é o padrão e continua definido em :root (topo do arquivo). O CLARO só troca as cores-base,
+   via data-theme="light" no <html> (aplicado pelo ThemeToggle e pelo script do layout.tsx). Nada de layout muda. */
+/* As variáveis de cor são registradas para o navegador poder ANIMAR a troca (transição suave, sem "flash") */
+@property --color-background { syntax: '<color>'; inherits: true; initial-value: #060606; }
+@property --color-text { syntax: '<color>'; inherits: true; initial-value: #f2efe9; }
+@property --color-muted { syntax: '<color>'; inherits: true; initial-value: #a3a29c; }
+@property --color-line { syntax: '<color>'; inherits: true; initial-value: rgba(242, 239, 233, 0.2); }
+:root { transition: --color-background var(--dur-fast) var(--ease), --color-text var(--dur-fast) var(--ease), --color-muted var(--dur-fast) var(--ease), --color-line var(--dur-fast) var(--ease); }
+/* 🎨 PEDRO — CORES DO TEMA CLARO (o destaque --color-accent e as cores das letras/adesivos continuam as mesmas) */
+:root[data-theme='light'] {
+  --color-background: #ffffff;
+  --color-text: #060606;
+  --color-muted: #6b6a66;
+  --color-line: rgba(6, 6, 6, 0.2);
+}
+/* Elementos com cor fixa no tema escuro: no claro, adaptam */
+:root[data-theme='light'] .fallback, :root[data-theme='light'] .wl-preview__in { background: #ececea; }
+:root[data-theme='light'] .cursor__dot { background: #f2efe9; } /* com mix-blend "difference", a bolinha clara vira escura sobre o fundo branco */
+
+/* Botão do tema — canto inferior direito; usa "difference" como o menu do topo, então fica legível sobre qualquer fundo */
+.theme-toggle {
+  position: fixed; right: var(--margin); bottom: calc(var(--margin) + env(safe-area-inset-bottom, 0px)); z-index: var(--z-nav);
+  width: 2.75rem; height: 2.75rem; display: grid; place-items: center; /* 44px: tamanho confortável para toque */
+  border: 1px solid currentColor; border-radius: 50%;
+  color: #fff; mix-blend-mode: difference;
+  transition: transform var(--dur-fast) var(--ease);
+}
+@media (hover: hover) { .theme-toggle:hover { transform: scale(1.1) rotate(18deg); } }
+.theme-toggle:active { transform: scale(0.94); }
+.theme-toggle__icon { grid-area: 1 / 1; width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.theme-toggle__moon { opacity: 0; transform: rotate(-90deg) scale(0.5); } /* escuro (padrão): mostra o sol */
+:root[data-theme='light'] .theme-toggle__sun { opacity: 0; transform: rotate(90deg) scale(0.5); } /* claro: mostra a lua */
+:root[data-theme='light'] .theme-toggle__moon { opacity: 1; transform: none; }
+/* o botão ocupa o canto inferior direito: o texto da base do rodapé e da primeira tela da Home para antes dele, para não ficar por baixo */
+.footer__base, .hero > .hero__row:last-child { padding-right: 4rem; }
