@@ -15,8 +15,8 @@ export default function Contact() {
         {socials.map((s) => <li key={s.label}><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>)}
         <li className="t-micro">{siteConfig.location}</li>
       </ul>
-      <div className="qf-wrap">
-        <h2 className="t-micro qf-wrap__title">SOLICITAR ORÇAMENTO</h2>
+      <div className="qform-wrap">
+        <h2 className="t-micro qform-wrap__title">SOLICITAR ORÇAMENTO</h2>
         <QuoteForm />
       </div>
     </section>
