@@ -152,16 +152,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: absolute;
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: clamp(0.85rem, 1.6vw, 1.35rem);
+  font-size: clamp(1.1rem, 2.3vw, 1.9rem); /* 🎨 PEDRO: tamanho do texto do adesivo */
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  padding: 0.5em 1em;
+  padding: 0.65em 1.3em;
   border-radius: 999px;
   border: 2px solid var(--color-background);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-  pointer-events: none; /* decorativo — não interfere no clique/scroll do hero */
   white-space: nowrap;
+  cursor: grab; /* agora são arrastáveis com o mouse ou o dedo */
+  touch-action: none;
+  user-select: none;
+  z-index: 1;
+  transition: box-shadow var(--dur-fast) var(--ease);
 }
+.sticker.is-dragging { cursor: grabbing; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45); z-index: 2; }
 /* 🎨 PEDRO — troque a cor de cada adesivo aqui */
 .sticker--a { background: #ffce45; color: #060606; top: -6%; left: 2%; transform: rotate(-9deg); }
 .sticker--b { background: #ff4d6d; color: #fff; top: 38%; right: -2%; transform: rotate(6deg); }
