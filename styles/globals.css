@@ -183,3 +183,31 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .sticker--b { top: 42%; right: 0; }
   .sticker--c { bottom: -6%; left: 8%; }
 }
+
+/* ===== FORMULÁRIO DE ORÇAMENTO (página CONTACT) ===== */
+.qf-wrap { margin-top: var(--sp-5); max-width: 42rem; }
+.qf-wrap__title { color: var(--color-muted); margin-bottom: var(--sp-2); }
+.qf { display: flex; flex-direction: column; gap: var(--sp-2); }
+.qf__row { display: grid; grid-template-columns: 1fr; gap: var(--sp-2); }
+@media (min-width: 640px) { .qf__row { grid-template-columns: 1fr 1fr; } }
+.qf__field { display: flex; flex-direction: column; gap: 0.35rem; }
+.qf__field > span { color: var(--color-muted); }
+.qf input, .qf select, .qf textarea {
+  background: transparent; border: 0; border-bottom: 1px solid var(--color-line);
+  color: var(--color-text); font-family: var(--font-sans); font-size: var(--fs-body);
+  padding: 0.5em 0; border-radius: 0; resize: vertical; transition: border-color var(--dur-fast) var(--ease);
+}
+.qf select { appearance: none; }
+.qf select option { background: var(--color-background); color: var(--color-text); }
+.qf input:focus, .qf select:focus, .qf textarea:focus { border-color: var(--color-accent); outline: none; }
+.qf__err { color: var(--color-accent); }
+.qf__bot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.qf__submit { align-self: flex-start; margin-top: var(--sp-2); padding: 0.9em 1.8em; border: 1px solid var(--color-text); border-radius: 999px; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.qf__submit:hover:not(:disabled) { background: var(--color-text); color: var(--color-background); }
+.qf__submit:disabled { opacity: 0.5; cursor: default; }
+.qf__done { padding-block: var(--sp-3); display: flex; flex-direction: column; gap: 0.4rem; }
+.qf__done .t-micro { color: var(--color-muted); }
+
+/* ===== CAOS TIPOGRÁFICO — título "LET'S WORK TOGETHER." no CONTACT ===== */
+.chaos__ch { display: inline-block; transition: transform 0.25s var(--ease), color 0.25s var(--ease); }
+.chaos__ch.is-chaos { transform: rotate(var(--r, 0deg)) scale(var(--s, 1)); }
