@@ -48,11 +48,15 @@ export function QuoteForm() {
   const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     if (status === 'sending' || status === 'success') return; // evita reenvio duplicado
-    const data = new FormData(ev.currentTarget);
+    const form = ev.currentTarget;
+    const data = new FormData(form);
     if (String(data.get('botcheck') || '')) return; // honeypot anti-spam — não é um campo real
     const v = validate(data);
     setErrors(v);
-    if (Object.keys(v).length) return;
+        if (Object.keys(v).length) {
+      (form.elements.namedItem(Object.keys(v)[0]) as HTMLElement | null)?.focus(); // leva o usuário até o campo
+      return;
+    }
 
     setStatus('sending');
     try {
@@ -76,13 +80,13 @@ export function QuoteForm() {
   }
 
   return (
-    <form className="qform" onSubmit={onSubmit} noValidate>
+    <form className="qform" onSubmit={onSubmit} onChange={onFieldChange} noValidate>
       {/* honeypot: campo invisível, só bots preenchem */}
       <input type="text" name="botcheck" className="qform__bot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
       <div className="qform__field">
         <label className="qform__q" htmlFor="qf-name">COMO VOCÊ SE CHAMA?</label>
-        <input id="qf-name" name="name" type="text" autoComplete="name" />
+       <input id="qf-name" name="name" type="text" autoComplete="name" aria-invalid={!!errors.name} />
         {errors.name && <span className="qform__err t-micro" role="alert">{errors.name}</span>}
       </div>
 
@@ -91,12 +95,12 @@ export function QuoteForm() {
         <div className="qform__sub">
           <label className="qform__subfield">
             <span className="t-micro">E-MAIL</span>
-            <input name="email" type="email" autoComplete="email" />
+            <input name="email" type="email" autoComplete="email" aria-invalid={!!errors.email} />
             {errors.email && <span className="qform__err t-micro" role="alert">{errors.email}</span>}
           </label>
           <label className="qform__subfield">
             <span className="t-micro">WHATSAPP / TELEFONE</span>
-            <input name="whatsapp" type="tel" autoComplete="tel" />
+            <input name="whatsapp" type="tel" autoComplete="tel" aria-invalid={!!errors.whatsapp} />
             {errors.whatsapp && <span className="qform__err t-micro" role="alert">{errors.whatsapp}</span>}
           </label>
         </div>
@@ -104,7 +108,7 @@ export function QuoteForm() {
 
       <div className="qform__field">
         <label className="qform__q" htmlFor="qf-type">O QUE VOCÊ PRECISA?</label>
-        <select id="qf-type" name="projectType" defaultValue="">
+        <select id="qf-type" name="projectType" defaultValue="" aria-invalid={!!errors.projectType}>
           <option value="" disabled>Selecione</option>
           {PROJECT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
         </select>
@@ -114,7 +118,7 @@ export function QuoteForm() {
 
       <div className="qform__field">
         <label className="qform__q" htmlFor="qf-briefing">ME CONTE SOBRE O SEU PROJETO.</label>
-        <textarea id="qf-briefing" name="briefing" className="qform__briefing" placeholder="Contexto, objetivo, referências — o que for relevante." />
+        <textarea id="qf-briefing" name="briefing" className="qform__briefing" placeholder="Contexto, objetivo, referências — o que for relevante." aria-invalid={!!errors.briefing} />
         {errors.briefing && <span className="qform__err t-micro" role="alert">{errors.briefing}</span>}
       </div>
 
