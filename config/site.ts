@@ -12,6 +12,7 @@ export const siteConfig = {
   behance: '', // ✏️ PEDRO: SEU BEHANCE (deixe '' se ainda não tiver — some do site sozinho)
   whatsapp: 'https://wa.me/5512996853826', // ✏️ PEDRO: ALTERE O WHATSAPP AQUI (formato wa.me/55DDDNUMERO)
   ogImage: '/og.jpg', // 🖼️ PEDRO — SUBSTITUA POR UMA IMAGEM 1200x630 EM /public
+  web3formsKey: 'SUA_ACCESS_KEY_AQUI', // 🔌 PEDRO — pegue grátis em web3forms.com (veja instruções da resposta)
   // ✏️ PEDRO: ALTERE AS DISCIPLINAS, FERRAMENTAS E EXPERIÊNCIA DA PÁGINA ABOUT
   disciplines: ['DESIGN', 'ART DIRECTION', 'BRANDING', 'PHOTOGRAPHY', 'VIDEO', 'MOTION', 'DIGITAL'],
   tools: ['Photoshop', 'Illustrator', 'Canva', 'CapCut', 'Affinity', 'Figma', 'Black Magic Camera', 'Lightroom'],
