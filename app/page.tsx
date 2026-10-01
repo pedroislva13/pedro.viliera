@@ -14,10 +14,8 @@ export default function Home() {
                 {/* ✏️ PEDRO: ALTERE SEU NOME AQUI (uma string por linha) */}
         <div className="hero__name">
           <TextReveal as="h1" lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
-          {/* ✏️ PEDRO: ALTERE O TEXTO OU AS CORES DOS ADESIVOS EM globals.css (.sticker--a/b/c) */}
-          <span className="sticker sticker--a" aria-hidden="true">PENSE</span>
-          <span className="sticker sticker--b" aria-hidden="true">CRIE</span>
-          <span className="sticker sticker--c" aria-hidden="true">FLUA</span>
+        {/* ✏️ PEDRO: ALTERE O TEXTO EM HeroStickers.tsx; as cores ficam em globals.css (.sticker--a/b/c) */}
+          <HeroStickers />
         </div>
         <div className="hero__row t-micro"><span>SCROLL TO EXPLORE ↓</span><span>SELECTED WORK (01–{String(featured.length).padStart(2, '0')})</span></div>
       </section>
