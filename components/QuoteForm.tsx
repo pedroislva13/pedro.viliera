@@ -8,7 +8,8 @@ type Status = 'idle' | 'sending' | 'success' | 'error';
 const PROJECT_TYPES = ['Branding', 'Social Media', 'Site / Digital', 'Fotografia', 'Vídeo / Motion', 'Outro'];
 const BUDGETS = ['Até R$ 1.000', 'R$ 1.000 – R$ 3.000', 'R$ 3.000 – R$ 8.000', 'Acima de R$ 8.000', 'Prefiro conversar'];
 
-// Formulário de orçamento do Contact. Envia via Web3Forms (serviço gratuito, sem backend próprio necessário).
+// Formulário de orçamento do Contact — layout editorial, uma pergunta grande por vez.
+// Envia via Web3Forms (serviço gratuito, sem backend próprio necessário).
 // 🔌 PEDRO — veja as instruções no final da resposta para pegar sua ACCESS KEY gratuita.
 export function QuoteForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -49,82 +50,83 @@ export function QuoteForm() {
 
   if (status === 'success') {
     return (
-      <div className="qf qf__done" role="status">
-        <p className="t-subtitle">Orçamento enviado.</p>
-        <p className="t-micro">Retorno em breve pelo e-mail ou WhatsApp informado.</p>
+      <div className="qform qform__done" role="status">
+        <p className="qform__q">Orçamento enviado.</p>
+        <p className="t-subtitle">Retorno em breve pelo e-mail ou WhatsApp informado.</p>
       </div>
     );
   }
 
   return (
-    <form className="qf" onSubmit={onSubmit} noValidate>
+    <form className="qform" onSubmit={onSubmit} noValidate>
       {/* honeypot: campo invisível, só bots preenchem */}
-      <input type="text" name="botcheck" className="qf__bot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+      <input type="text" name="botcheck" className="qform__bot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
-      <div className="qf__row">
-        <label className="qf__field">
-          <span className="t-micro">NOME</span>
-          <input name="name" type="text" autoComplete="name" />
-          {errors.name && <span className="qf__err t-micro" role="alert">{errors.name}</span>}
-        </label>
-        <label className="qf__field">
-          <span className="t-micro">E-MAIL</span>
-          <input name="email" type="email" autoComplete="email" />
-          {errors.email && <span className="qf__err t-micro" role="alert">{errors.email}</span>}
-        </label>
+      <div className="qform__field">
+        <label className="qform__q" htmlFor="qf-name">COMO VOCÊ SE CHAMA?</label>
+        <input id="qf-name" name="name" type="text" autoComplete="name" />
+        {errors.name && <span className="qform__err t-micro" role="alert">{errors.name}</span>}
       </div>
 
-      <div className="qf__row">
-        <label className="qf__field">
-          <span className="t-micro">WHATSAPP / TELEFONE</span>
-          <input name="whatsapp" type="tel" autoComplete="tel" />
-          {errors.whatsapp && <span className="qf__err t-micro" role="alert">{errors.whatsapp}</span>}
-        </label>
-        <label className="qf__field">
-          <span className="t-micro">TIPO DE PROJETO</span>
-          <select name="projectType" defaultValue="">
-            <option value="" disabled>Selecione</option>
-            {PROJECT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
-          </select>
-          {errors.projectType && <span className="qf__err t-micro" role="alert">{errors.projectType}</span>}
-        </label>
+      <div className="qform__field">
+        <p className="qform__q">COMO POSSO TE CHAMAR?</p>
+        <div className="qform__sub">
+          <label className="qform__subfield">
+            <span className="t-micro">E-MAIL</span>
+            <input name="email" type="email" autoComplete="email" />
+            {errors.email && <span className="qform__err t-micro" role="alert">{errors.email}</span>}
+          </label>
+          <label className="qform__subfield">
+            <span className="t-micro">WHATSAPP / TELEFONE</span>
+            <input name="whatsapp" type="tel" autoComplete="tel" />
+            {errors.whatsapp && <span className="qform__err t-micro" role="alert">{errors.whatsapp}</span>}
+          </label>
+        </div>
       </div>
 
-      <label className="qf__field">
-        <span className="t-micro">O QUE VOCÊ PRECISA</span>
-        <input name="need" type="text" placeholder="Ex: identidade visual completa, conteúdo mensal..." />
-      </label>
-
-      <label className="qf__field">
-        <span className="t-micro">DESCRIÇÃO DO PROJETO</span>
-        <textarea name="briefing" rows={4} placeholder="Conte um pouco sobre o contexto, objetivo e referências." />
-        {errors.briefing && <span className="qf__err t-micro" role="alert">{errors.briefing}</span>}
-      </label>
-
-      <div className="qf__row">
-        <label className="qf__field">
-          <span className="t-micro">PRAZO DESEJADO</span>
-          <input name="deadline" type="text" placeholder="Ex: 30 dias, sem pressa..." />
-        </label>
-        <label className="qf__field">
-          <span className="t-micro">FAIXA DE ORÇAMENTO</span>
-          <select name="budget" defaultValue="">
-            <option value="" disabled>Selecione</option>
-            {BUDGETS.map((b) => <option key={b} value={b}>{b}</option>)}
-          </select>
-        </label>
+      <div className="qform__field">
+        <label className="qform__q" htmlFor="qf-type">O QUE VOCÊ PRECISA?</label>
+        <select id="qf-type" name="projectType" defaultValue="">
+          <option value="" disabled>Selecione</option>
+          {PROJECT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+        </select>
+        {errors.projectType && <span className="qform__err t-micro" role="alert">{errors.projectType}</span>}
+        <input name="need" type="text" className="qform__secondary" placeholder="Algo mais específico? (opcional)" />
       </div>
 
-      <label className="qf__field">
-        <span className="t-micro">INFORMAÇÕES ADICIONAIS</span>
-        <textarea name="extra" rows={3} placeholder="Opcional" />
-      </label>
+      <div className="qform__field">
+        <label className="qform__q" htmlFor="qf-briefing">ME CONTE SOBRE O SEU PROJETO.</label>
+        <textarea id="qf-briefing" name="briefing" className="qform__briefing" placeholder="Contexto, objetivo, referências — o que for relevante." />
+        {errors.briefing && <span className="qform__err t-micro" role="alert">{errors.briefing}</span>}
+      </div>
+
+      <div className="qform__field">
+        <p className="qform__q">QUANDO VOCÊ PRECISA DISSO?</p>
+        <div className="qform__sub">
+          <label className="qform__subfield">
+            <span className="t-micro">PRAZO</span>
+            <input name="deadline" type="text" placeholder="Ex: 30 dias, sem pressa..." />
+          </label>
+          <label className="qform__subfield">
+            <span className="t-micro">FAIXA DE ORÇAMENTO</span>
+            <select name="budget" defaultValue="">
+              <option value="" disabled>Selecione</option>
+              {BUDGETS.map((b) => <option key={b} value={b}>{b}</option>)}
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div className="qform__field">
+        <label className="qform__q" htmlFor="qf-extra">MAIS ALGUMA COISA QUE EU DEVERIA SABER?</label>
+        <textarea id="qf-extra" name="extra" className="qform__textarea-sm" placeholder="Opcional" />
+      </div>
 
       {status === 'error' && (
-        <p className="qf__err t-micro" role="alert">Não foi possível enviar agora. Tente de novo ou chame no WhatsApp.</p>
+        <p className="qform__err t-micro" role="alert">Não foi possível enviar agora. Tente de novo ou chame no WhatsApp.</p>
       )}
 
-      <button type="submit" className="qf__submit t-micro" disabled={status === 'sending'}>
+      <button type="submit" className="qform__submit" disabled={status === 'sending'} data-cursor="view" data-cursor-label="ENVIAR">
         {status === 'sending' ? 'ENVIANDO...' : 'ENVIAR ORÇAMENTO →'}
       </button>
     </form>
