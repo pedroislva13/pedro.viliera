@@ -16,6 +16,7 @@ export function QuoteForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
     // Campos obrigatórios, na ordem em que aparecem no formulário. O `label` é o nome mostrado na mensagem.
+   // Campos obrigatórios, na ordem em que aparecem no formulário. O `label` é o nome mostrado na mensagem.
   const REQUIRED = [
     { name: 'name', label: 'Nome' },
     { name: 'email', label: 'E-mail' },
