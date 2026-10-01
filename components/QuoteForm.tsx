@@ -15,16 +15,33 @@ export function QuoteForm() {
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+    // Campos obrigatórios, na ordem em que aparecem no formulário. O `label` é o nome mostrado na mensagem.
+  const REQUIRED = [
+    { name: 'name', label: 'Nome' },
+    { name: 'email', label: 'E-mail' },
+    { name: 'whatsapp', label: 'WhatsApp / Telefone' },
+    { name: 'projectType', label: 'Tipo de projeto' },
+    { name: 'briefing', label: 'Descrição do projeto' },
+  ];
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Retorna só o PRIMEIRO problema encontrado (campo vazio ou e-mail inválido), na ordem do formulário.
   const validate = (data: FormData) => {
-    const e: Record<string, string> = {};
-    if (!String(data.get('name') || '').trim()) e.name = 'Preencha seu nome.';
-    const email = String(data.get('email') || '').trim();
-    if (!email) e.email = 'Preencha seu e-mail.';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = 'E-mail inválido.';
-    if (!String(data.get('whatsapp') || '').trim()) e.whatsapp = 'Preencha um telefone ou WhatsApp.';
-    if (!String(data.get('projectType') || '').trim()) e.projectType = 'Selecione o tipo de projeto.';
-    if (!String(data.get('briefing') || '').trim()) e.briefing = 'Conte um pouco sobre o projeto.';
-    return e;
+    for (const f of REQUIRED) {
+      const value = String(data.get(f.name) || '').trim();
+      if (!value) return { [f.name]: `Preencha o campo ${f.label} para enviar.` };
+      if (f.name === 'email' && !EMAIL_RE.test(value)) return { email: 'E-mail inválido.' };
+    }
+    return {} as Record<string, string>;
+  };
+
+  // Some com o erro assim que o campo for preenchido corretamente.
+  const onFieldChange = (ev: React.FormEvent<HTMLFormElement>) => {
+    const el = ev.target as HTMLInputElement;
+    if (!el.name || !errors[el.name]) return;
+    const value = el.value.trim();
+    const ok = el.name === 'email' ? EMAIL_RE.test(value) : !!value;
+    if (ok) setErrors((prev) => { const next = { ...prev }; delete next[el.name]; return next; });
   };
 
   const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
