@@ -4,6 +4,7 @@ import { TextReveal } from '@/components/TextReveal';
 import { ProjectCard } from '@/components/ProjectCard';
 import { TransitionLink } from '@/components/TransitionLink';
 import { HeroStickers } from '@/components/HeroStickers';
+import { ContactHeroTitle } from '@/components/ContactHeroTitle';
 
 export default function Home() {
   const featured = projects.filter((p) => p.featured);
