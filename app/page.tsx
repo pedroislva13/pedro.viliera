@@ -14,6 +14,7 @@ export default function Home() {
         <div className="hero__row t-micro"><span>{siteConfig.role}</span><span>{siteConfig.location}</span><span>2026</span></div>
                 {/* ✏️ PEDRO: ALTERE SEU NOME AQUI (uma string por linha) */}
         <div className="hero__name">
+          <ContactHeroTitle lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
           <TextReveal as="h1" lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
         {/* ✏️ PEDRO: ALTERE O TEXTO EM HeroStickers.tsx; as cores ficam em globals.css (.sticker--a/b/c) */}
           <HeroStickers />
