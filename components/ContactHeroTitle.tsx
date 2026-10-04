@@ -16,10 +16,10 @@ const COLORS = ['#ff4d6d', '#4dd0ff', '#ffce45', '#8b5cf6', '#2dd4bf', '#f97316'
 // ✏️ PEDRO — símbolos decorativos que substituem algumas letras durante o efeito (puramente visual)
 const GLYPHS = ['Ж', 'ロ', '貝', 'ش', 'Ɵ', '大'];
 
-// O Contact é a referência original dessa animação. A lógica inteira agora vive em AnimatedTitle.tsx
-// (para poder ser reutilizada na Home e no About também), e este arquivo só reexporta o mesmo
-// componente com o nome antigo — o comportamento do Contact continua EXATAMENTE o mesmo de antes.
-export { AnimatedTitle as ContactHeroTitle } from './AnimatedTitle';
+// Título do Contact. Cada letra é um <span> independente: o hover (via CSS :hover, sem JS) muda
+// SÓ a letra sob o mouse — as demais ficam intocadas. No celular, uma classe no título dispara
+// a mesma transformação em todas as letras uma única vez, simulando o hover (sem precisar de toque).
+export function ContactHeroTitle({ lines, className = '', wait = false }: { lines: string[]; className?: string; wait?: boolean }) {
   // `wait` = espera o Loader terminar (usado no título da Home). Sem ele, o comportamento é o mesmo de antes.
   const { ref, on } = useInView<HTMLHeadingElement>(wait);
   const [preview, setPreview] = useState(false);
