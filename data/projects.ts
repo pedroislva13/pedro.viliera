@@ -3,6 +3,7 @@ export type Project = {
   description: string; shortDescription: string; result: string;
   coverImage: string; hoverImage: string; heroImage: string; images: string[]; videos: string[];
   services: string[]; tools: string[]; client: string; credits: string[]; color: string; featured: boolean;
+  concept?: string; process?: { title: string; text: string }[]; // opcionais: só aparecem na página do projeto se você preencher
 };
 // 🖼️ PEDRO — SUBSTITUA PELOS ARQUIVOS REAIS: /public/images/projects/<slug>/cover.jpg, hero.jpg, 01.jpg ... 05.jpg
 const media = (slug: string) => ({
