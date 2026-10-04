@@ -289,3 +289,39 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 :root[data-theme='light'] .theme-toggle__moon { opacity: 1; transform: none; }
 /* o botão ocupa o canto inferior direito: o texto da base do rodapé e da primeira tela da Home para antes dele, para não ficar por baixo */
 .footer__base, .hero > .hero__row:last-child { padding-right: 4rem; }
+
+/* ===== NOVA ESTRUTURA: HOME EDITORIAL / TRABALHOS / ENCERRAMENTO / ORÇAMENTO ===== */
+.chaos__w { display: inline-block; white-space: nowrap; } /* em frases, cada palavra fica inteira (não quebra no meio) */
+/* Home: blocos foto + texto (o 2º é espelhado) */
+.hblock { padding-block: var(--sp-5) 0; row-gap: var(--sp-3); align-items: center; }
+.hblock__text { display: flex; flex-direction: column; gap: var(--sp-3); align-items: flex-start; }
+.hblock__label { color: var(--color-muted); }
+.hblock__title { font-size: clamp(2.2rem, 4.8vw, 4.8rem); } /* mesma família do .t-headline, só menor para caber na meia coluna */
+.hblock__text p { max-width: 44ch; }
+.hblock__list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem var(--gap); color: var(--color-muted); }
+.hblock__more { color: var(--color-accent); }
+@media (min-width: 1024px) {
+  .hblock--flip .hblock__img { grid-column: 7 / -1; grid-row: 1; }
+  .hblock--flip .hblock__text { grid-column: 1 / 7; grid-row: 1; }
+  .hblock:not(.hblock--flip) .hblock__text { padding-left: var(--sp-3); }
+  .hblock--flip .hblock__text { padding-right: var(--sp-3); }
+}
+.hcta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-3); padding: var(--sp-5) var(--margin); }
+/* Trabalhos */
+.page + .work { padding-top: var(--sp-3); }
+.card__desc { max-width: 42ch; margin-top: var(--sp-1); color: var(--color-muted); }
+.pindex { padding: var(--sp-5) var(--margin) 0; }
+.pindex__title { color: var(--color-muted); }
+.pindex .rows { margin-top: var(--sp-2); }
+.pprocess { list-style: none; display: grid; gap: var(--sp-3); } .pprocess p { margin-top: 0.4rem; }
+.closing { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-3); padding: var(--sp-5) var(--margin); border-top: 1px solid var(--color-line); margin-top: var(--sp-5); }
+.closing__eyebrow { color: var(--color-muted); }
+.closing .t-display { font-size: clamp(2.5rem, 12vw, 20rem); }
+/* Orçamento: serviços como "chips" marcáveis */
+.qform__chips { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
+.qform__chip { position: relative; }
+.qform .qform__chip input { position: absolute; opacity: 0; width: 0; height: 0; padding: 0; border: 0; pointer-events: none; }
+.qform__chip span { display: inline-block; padding: 0.8em 1.4em; border: 1px solid var(--color-line); border-radius: 999px; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+@media (hover: hover) { .qform__chip:hover span { border-color: var(--color-text); } }
+.qform__chip input:checked + span { background: var(--color-text); color: var(--color-background); border-color: var(--color-text); }
+.qform__chip input:focus-visible + span { outline: 2px solid var(--color-accent); outline-offset: 3px; }
