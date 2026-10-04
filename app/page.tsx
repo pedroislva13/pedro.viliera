@@ -1,51 +1,40 @@
-import { siteConfig } from '@/config/site';
-import { AnimatedTitle } from '@/components/AnimatedTitle';
-import { HeroStickers } from '@/components/HeroStickers';
+import { siteConfig, homeBlocks } from '@/config/site';
+import { projects } from '@/data/projects';
+import { ContactHeroTitle, ChaosText } from '@/components/ContactHeroTitle';
 import { ImageReveal } from '@/components/ImageReveal';
 import { TransitionLink } from '@/components/TransitionLink';
+import { HeroStickers } from '@/components/HeroStickers';
 
 export default function Home() {
+  const featured = projects.filter((p) => p.featured);
   return (
     <>
       <section className="hero">
         <div className="hero__row t-micro"><span>{siteConfig.role}</span><span>{siteConfig.location}</span><span>2026</span></div>
-        {/* ✏️ PEDRO: ALTERE SEU NOME AQUI (uma string por linha) */}
+                {/* ✏️ PEDRO: ALTERE SEU NOME AQUI (uma string por linha) */}
         <div className="hero__name">
-          <AnimatedTitle lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
-          {/* ✏️ PEDRO: ALTERE O TEXTO EM HeroStickers.tsx; as cores ficam em globals.css (.sticker--a/b/c) */}
+          <ContactHeroTitle lines={['PEDRO', 'VILEIRA']} wait className="t-display" />
+        {/* ✏️ PEDRO: ALTERE O TEXTO EM HeroStickers.tsx; as cores ficam em globals.css (.sticker--a/b/c) */}
           <HeroStickers />
         </div>
-        <div className="hero__row t-micro"><span>SCROLL TO EXPLORE ↓</span><span>DESIGNER / ART DIRECTOR</span></div>
+        <div className="hero__row t-micro"><span>SCROLL TO EXPLORE ↓</span><span>SELECTED WORK (01–{String(featured.length).padStart(2, '0')})</span></div>
       </section>
-
-      {/* ===== BLOCO 1 — foto à esquerda, texto à direita ===== */}
-      <section className="grid home-about">
-        {/* 🖼️ PEDRO — SUBSTITUA POR UMA FOTO SUA EM /public/images/about/pedro-1.jpg */}
-        <ImageReveal src="/images/about/pedro-1.jpg" alt="Pedro Vileira" ratio="4 / 5" className="c-half-l" />
-        <div className="c-half-r home-about__text">
-          <p className="t-micro">QUEM SOU EU</p>
-          {/* ✏️ PEDRO: ALTERE ESSE TEXTO EM config/site.ts (campo bio) */}
-          <p className="t-subtitle">{siteConfig.bio}</p>
-        </div>
-      </section>
-
-      {/* ===== BLOCO 2 — texto à esquerda, foto à direita ===== */}
-      <section className="grid home-about">
-        <div className="c-half-l home-about__text">
-          <p className="t-micro">COMO EU PENSO</p>
-          {/* ✏️ PEDRO: ALTERE ESSE TEXTO EM config/site.ts (campo approach) */}
-          <p className="t-subtitle">{siteConfig.approach}</p>
-        </div>
-        {/* 🖼️ PEDRO — SUBSTITUA POR UMA FOTO SUA EM /public/images/about/pedro-2.jpg */}
-        <ImageReveal src="/images/about/pedro-2.jpg" alt="Pedro Vileira" ratio="4 / 5" className="c-right" />
-      </section>
-
-      {/* ===== CTA final — leva para Trabalhos, projetos não aparecem na Home ===== */}
-      <section className="grid home-cta">
-        <p className="t-headline full">SEE MY<br />WORK.</p>
-        <div className="full work__all">
-          <TransitionLink href="/work" label="WORK" className="t-headline" data-cursor="view" data-cursor-label="GO">VIEW PROJECTS →</TransitionLink>
-        </div>
+      {/* ✏️ PEDRO: textos e fotos dos blocos ficam em config/site.ts (homeBlocks). Bloco 1: foto à esquerda; bloco 2: foto à direita */}
+      {homeBlocks.map((b, i) => (
+        <section key={b.label} className={`grid hblock ${i % 2 ? 'hblock--flip' : ''}`} aria-label={b.label}>
+          <div className="c-half-l hblock__img"><ImageReveal src={b.image} alt={b.alt} ratio="4 / 5" sizes="(min-width:1024px) 50vw, 100vw" /></div>
+          <div className="c-half-r hblock__text">
+            <span className="t-micro hblock__label">( {b.label} )</span>
+            <ChaosText as="h2" lines={[b.title]} inView className="t-headline hblock__title" />
+            <p className="t-subtitle">{b.text}</p>
+            {b.list.length > 0 && <ul className="hblock__list t-micro">{b.list.map((a) => <li key={a}>{a}</li>)}</ul>}
+            {b.link && <TransitionLink href={b.link.href} label="ABOUT" className="t-micro hblock__more" data-cursor="view" data-cursor-label="ABOUT">{b.link.label}</TransitionLink>}
+          </div>
+        </section>
+      ))}
+      <section className="hcta" aria-label="Trabalhos">
+        <ChaosText as="h2" lines={['SEE MY WORK']} inView className="t-headline" />
+        <TransitionLink href="/work" label="TRABALHOS" className="qform__submit" data-cursor="view" data-cursor-label="GO">TRABALHOS →</TransitionLink>
       </section>
     </>
   );
