@@ -29,3 +29,15 @@ export const socials = [
   { label: 'BEHANCE', href: siteConfig.behance },
   { label: 'WHATSAPP', href: siteConfig.whatsapp },
 ].filter((s) => s.href);
+
+// ✏️ PEDRO — BLOCOS EDITORIAIS DA HOME (foto + texto). Ordem: 1º foto à esquerda, 2º foto à direita.
+// 🖼️ Coloque suas fotos em /public/images/home/ (pedro-01.jpg, pedro-02.jpg) — proporção 4:5, ex: 1600x2000px.
+export const areas = ['Marketing digital', 'Social media', 'Direção de arte', 'Design gráfico', 'Fotografia', 'Videomaker', 'Criação de conteúdo', 'Storytelling', 'Estratégia de marca e comunicação'];
+export const homeBlocks = [
+  { image: '/images/home/pedro-01.jpg', alt: 'Retrato de Pedro Vileira', label: 'QUEM SOU', title: 'Estratégia, estética, narrativa e execução.',
+    text: 'Sou Pedro Vileira. Crio marcas, campanhas e conteúdo — do plano ao enquadramento, do roteiro à peça final. Cada área trabalha a favor da outra para que a ideia chegue inteira ao público.',
+    list: [] as string[], link: null as { href: string; label: string } | null },
+  { image: '/images/home/pedro-02.jpg', alt: 'Pedro Vileira em processo criativo', label: 'COMO EU TRABALHO', title: 'Começo pelo porquê. Termino no detalhe.',
+    text: 'Entendo a marca e o público, traduzo isso em linguagem visual e narrativa e acompanho a execução até a peça final. Fotografia, vídeo e design nascem juntos, não em etapas separadas.',
+    list: areas, link: { href: '/about', label: 'MAIS SOBRE MIM →' } },
+];
