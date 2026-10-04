@@ -5,7 +5,7 @@ import type { CSSProperties } from 'react';
 import { TransitionLink } from './TransitionLink';
 
 // ✏️ PEDRO: ALTERE OS ITENS DO MENU AQUI
-const links = [{ href: '/work', label: 'WORK' }, { href: '/about', label: 'ABOUT' }, { href: '/contact', label: 'CONTACT' }];
+const links = [{ href: '/', label: 'HOME' }, { href: '/work', label: 'TRABALHOS' }, { href: '/contact', label: 'CONTACT' }, { href: '/quote', label: 'ORÇAMENTO' }];
 
 export function Navigation() {
   const path = usePathname();
@@ -22,7 +22,7 @@ export function Navigation() {
         <TransitionLink href="/" className="nav__logo" label="PEDRO VILEIRA" onNavigate={() => setOpen(false)} aria-label="Pedro Vileira — Home">PV</TransitionLink>
         <nav aria-label="Main" className="nav__links">
           {links.map((l) => (
-            <TransitionLink key={l.href} href={l.href} label={l.label} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</TransitionLink>
+            <TransitionLink key={l.href} href={l.href} label={l.label} aria-current={(l.href === '/' ? path === '/' : path.startsWith(l.href)) ? 'page' : undefined}>{l.label}</TransitionLink>
           ))}
         </nav>
         <button className="nav__btn" aria-expanded={open} aria-controls="menu" onClick={() => setOpen(!open)}>{open ? 'CLOSE' : 'MENU'}</button>
