@@ -5,6 +5,7 @@ import { TextReveal } from '@/components/TextReveal';
 import { ImageReveal } from '@/components/ImageReveal';
 import { ProjectGallery } from '@/components/ProjectGallery';
 import { TransitionLink } from '@/components/TransitionLink';
+import { ClosingCTA } from '@/components/ClosingCTA';
 
 type Props = { params: Promise<{ slug: string }> };
 export const generateStaticParams = () => projects.map((p) => ({ slug: p.slug }));
@@ -34,9 +35,16 @@ export default async function ProjectPage({ params }: Props) {
           <dt className="t-micro">CREDITS</dt><dd>{p.credits.join(', ')}</dd>
         </dl>
       </section>
+      {(p.concept || p.process) && (
+        <section className="grid pmeta">
+          {p.concept && <div className="c-half-l"><h2 className="t-micro">CONCEPT</h2><p className="t-subtitle">{p.concept}</p></div>}
+          {p.process && <ol className="c-half-r t-caption pprocess">{p.process.map((s, i) => <li key={s.title}><span className="t-micro">{pad(i + 1)} — {s.title}</span><p>{s.text}</p></li>)}</ol>}
+        </section>
+      )}
       <ProjectGallery title={p.title} images={p.images.slice(0, -1)} videos={p.videos} />
       <div className="grid"><div className="full"><ImageReveal src={p.images[p.images.length - 1]} alt={`${p.title} — tela cheia`} ratio="21 / 9" /></div></div>
       <section className="grid pmeta"><div className="c-half-l"><h2 className="t-micro">RESULT</h2><p className="t-subtitle">{p.result}</p></div></section>
+      <ClosingCTA eyebrow="LIKE THIS?" />
       <TransitionLink href={`/work/${next.slug}`} label={next.title} className="next page" data-cursor="view" data-cursor-label="NEXT">
         <span className="t-micro">NEXT PROJECT</span><span className="t-display">{next.title}</span>
       </TransitionLink>
