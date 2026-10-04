@@ -33,7 +33,7 @@ export default function Home() {
         </section>
       ))}
       <section className="hcta" aria-label="Trabalhos">
-        <ChaosText as="h2" lines={['SEE MY WORK']} inView className="t-headline" />
+        <ChaosText as="h2" lines={['VEJA OS MEUS TRABALHOS!']} inView className="t-headline" />
         <TransitionLink href="/work" label="TRABALHOS" className="qform__submit" data-cursor="view" data-cursor-label="GO">TRABALHOS →</TransitionLink>
       </section>
     </>
