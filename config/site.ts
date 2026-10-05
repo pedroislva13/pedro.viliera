@@ -9,8 +9,8 @@ export const siteConfig = {
   location: 'SÃO PAULO, BR', // ✏️ PEDRO: ALTERE SUA LOCALIZAÇÃO AQUI
   email: 'pedrovileirax@gmail.com', // ✏️ PEDRO: ALTERE O E-MAIL AQUI
   instagram: 'https://instagram.com/pdrovileira', // ✏️ PEDRO: ALTERE O LINK DO INSTAGRAM AQUI
-  linkedin: '', // ✏️ PEDRO: SEU LINKEDIN (deixe '' se ainda não tiver — some do site sozinho)
-  behance: '', // ✏️ PEDRO: SEU BEHANCE (deixe '' se ainda não tiver — some do site sozinho)
+  linkedin: 'www.linkedin.com/in/pedro-vileira-0b10b9441', // ✏️ PEDRO: SEU LINKEDIN (deixe '' se ainda não tiver — some do site sozinho)
+  behance: 'https://www.behance.net/pedrovileira', // ✏️ PEDRO: SEU BEHANCE (deixe '' se ainda não tiver — some do site sozinho)
   whatsapp: 'https://wa.me/5512996853826', // ✏️ PEDRO: ALTERE O WHATSAPP AQUI (formato wa.me/55DDDNUMERO)
   ogImage: '/og.jpg', // 🖼️ PEDRO — SUBSTITUA POR UMA IMAGEM 1200x630 EM /public
   web3formsKey: '3794356d-1bde-47d1-b6ee-4a2e807b54cf', // 🔌 PEDRO — pegue grátis em web3forms.com (veja instruções da resposta)
