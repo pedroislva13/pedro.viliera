@@ -17,7 +17,7 @@ export default function Home() {
         {/* ✏️ PEDRO: ALTERE O TEXTO EM HeroStickers.tsx; as cores ficam em globals.css (.sticker--a/b/c) */}
           <HeroStickers />
         </div>
-        <div className="hero__row t-micro"><span>SCROLL TO EXPLORE ↓</span><span>SELECTED WORK (01–{String(featured.length).padStart(2, '0')})</span></div>
+        <div className="hero__row t-micro"><span>ROLE PARA EXPLORAR ↓</span><span>SELECIONE UM PROJETO (01–{String(featured.length).padStart(2, '0')})</span></div>
       </section>
       {/* ✏️ PEDRO: textos e fotos dos blocos ficam em config/site.ts (homeBlocks). Bloco 1: foto à esquerda; bloco 2: foto à direita */}
       {homeBlocks.map((b, i) => (
