@@ -6,7 +6,7 @@ export const siteConfig = {
   description: 'Design, direção de arte, branding, fotografia e vídeo. Portfólio de Pedro Vileira.', // ✏️ PEDRO: ALTERE A DESCRIÇÃO (SEO)
   bio: 'Desenho marcas, campanhas e sistemas visuais. Fotografo e edito o que desenho. Trabalho na distância entre a ideia e a peça final.', // ✏️ PEDRO: ALTERE SUA BIO AQUI
     approach: 'Estratégia, estética, narrativa e execução — nessa ordem, sempre. Penso o projeto inteiro antes de abrir qualquer programa.', // ✏️ PEDRO: ALTERE COMO VOCÊ DESCREVE SEU PROCESSO AQUI
-  location: 'SÃO PAULO, BR', // ✏️ PEDRO: ALTERE SUA LOCALIZAÇÃO AQUI
+  location: 'SÃO JOSÉ DOS CAMPOS, BR', // ✏️ PEDRO: ALTERE SUA LOCALIZAÇÃO AQUI
   email: 'pedrovileirax@gmail.com', // ✏️ PEDRO: ALTERE O E-MAIL AQUI
   instagram: 'https://instagram.com/pdrovileira', // ✏️ PEDRO: ALTERE O LINK DO INSTAGRAM AQUI
   linkedin: 'www.linkedin.com/in/pedro-vileira-0b10b9441', // ✏️ PEDRO: SEU LINKEDIN (deixe '' se ainda não tiver — some do site sozinho)
@@ -15,7 +15,7 @@ export const siteConfig = {
   ogImage: '/og.jpg', // 🖼️ PEDRO — SUBSTITUA POR UMA IMAGEM 1200x630 EM /public
   web3formsKey: '3794356d-1bde-47d1-b6ee-4a2e807b54cf', // 🔌 PEDRO — pegue grátis em web3forms.com (veja instruções da resposta)
   // ✏️ PEDRO: ALTERE AS DISCIPLINAS, FERRAMENTAS E EXPERIÊNCIA DA PÁGINA ABOUT
-  disciplines: ['DESIGN', 'ART DIRECTION', 'BRANDING', 'PHOTOGRAPHY', 'VIDEO', 'MOTION', 'DIGITAL'],
+  disciplines: ['DESIGN', 'ART DIRECTION', 'BRANDING', 'PHOTOGRAPHY', 'VIDEO', 'DIGITAL'],
   tools: ['Photoshop', 'Illustrator', 'Canva', 'CapCut', 'Affinity', 'Figma', 'Black Magic Camera', 'Lightroom'],
   experience: [
     { period: '2026 —', role: 'Art Director / Content Creator', place: 'Colinas Imóveis' },
