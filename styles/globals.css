@@ -56,30 +56,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .js .tr.is-in .tr__in { transform: none; }
 .ir { position: relative; overflow: hidden; width: 100%; }
 .ir__in, .media, .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.ir {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  clip-path: inset(0);
-}
-
-.ir__in {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.media,
-.fallback {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Animação apenas quando o elemento realmente entra na tela */
 .js .ir__in {
   transform: scale(1.08);
   transition: transform var(--dur-slow) var(--ease);
@@ -87,15 +63,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .js .ir.is-in .ir__in {
   transform: scale(1);
-}
-
-.fallback {
-  display: grid;
-  place-content: center;
-  text-align: center;
-  background: #151515;
-  color: var(--color-muted);
-  padding: var(--sp-2);
 }
 .fallback { display: grid; place-content: center; text-align: center; background: #151515; color: var(--color-muted); padding: var(--sp-2); }
 
