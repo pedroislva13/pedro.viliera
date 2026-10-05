@@ -33,7 +33,7 @@ export const socials = [
 // ✏️ PEDRO — BLOCOS EDITORIAIS DA HOME (foto + texto). Ordem: 1º foto à esquerda, 2º foto à direita.
 // 🖼️ Coloque suas fotos em /public/images/home/ (pedro-01.jpg, pedro-02.jpg) — proporção 4:5, ex: 1600x2000px.
 export const areas = ['Marketing digital', 'Social media', 'Direção de arte', 'Design gráfico', 'Fotografia', 'Videomaker', 'Criação de conteúdo', 'Storytelling', 'Estratégia de marca e comunicação'];
-export const homeBlocks = [
+export const homeBlocks = [pedro-01.jpg, pedro-02.jpg]
   { image: '/images/home/pedro-01.jpg', alt: 'Retrato de Pedro Vileira', label: 'QUEM SOU', title: 'Estratégia, estética, narrativa e execução.',
     text: 'Sou Pedro Vileira. Crio marcas, campanhas e conteúdo — do plano ao enquadramento, do roteiro à peça final. Cada área trabalha a favor da outra para que a ideia chegue inteira ao público.',
     list: [] as string[], link: null as { href: string; label: string } | null },
