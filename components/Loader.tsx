@@ -26,7 +26,7 @@ export function Loader() {
   }, []);
   if (phase === 'idle' || phase === 'done') return null;
   return (
-    <div className={`loader ${phase === 'out' ? 'is-out' : ''}`} role="status" aria-label="Loading">
+    <div className={`loader ${phase === 'out' ? 'is-out' : ''}`} role="status" aria-label="Carregando">
       <span className="t-micro">{siteConfig.name}</span>
       <span className="loader__n t-display" aria-hidden="true">{String(n).padStart(2, '0')}</span>
     </div>
