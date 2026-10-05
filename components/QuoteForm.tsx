@@ -58,7 +58,10 @@ export function QuoteForm() {
       (form.elements.namedItem(Object.keys(v)[0]) as HTMLElement | null)?.focus(); // leva o usuário até o campo
       return;
     }
-
+    // vários serviços marcados viram uma única linha no e-mail (Web3Forms recebe um valor por campo)
+    const services = data.getAll('services').map(String);
+    data.delete('services');
+    if (services.length) data.set('services', services.join(', '));
     setStatus('sending');
     try {
       data.append('access_key', siteConfig.web3formsKey);
@@ -92,7 +95,7 @@ export function QuoteForm() {
       </div>
 
       <div className="qform__field">
-        <p className="qform__q">COMO POSSO TE CHAMAR?</p>
+        <p className="qform__q">COMO PODEMOS CONVERSAR?</p>
         <div className="qform__sub">
           <label className="qform__subfield">
             <span className="t-micro">E-MAIL</span>
@@ -106,7 +109,10 @@ export function QuoteForm() {
           </label>
         </div>
       </div>
-
+      <div className="qform__field">
+        <label className="qform__q" htmlFor="qf-company">QUAL É A SUA EMPRESA OU MARCA?</label>
+        <input id="qf-company" name="company" type="text" autoComplete="organization" placeholder="Opcional" />
+      </div>
       <div className="qform__field">
         <label className="qform__q" htmlFor="qf-type">O QUE VOCÊ PRECISA?</label>
         <select id="qf-type" name="projectType" defaultValue="" aria-invalid={!!errors.projectType}>
@@ -116,7 +122,14 @@ export function QuoteForm() {
         {errors.projectType && <span className="qform__err t-micro" role="alert">{errors.projectType}</span>}
         <input name="need" type="text" className="qform__secondary" placeholder="Algo mais específico? (opcional)" />
       </div>
-
+      <div className="qform__field">
+        <p className="qform__q">QUAIS SERVIÇOS VOCÊ PRECISA?</p>
+        <div className="qform__chips">
+          {SERVICES.map((sv) => (
+            <label key={sv} className="qform__chip"><input type="checkbox" name="services" value={sv} /><span className="t-micro">{sv}</span></label>
+          ))}
+        </div>
+      </div>
       <div className="qform__field">
         <label className="qform__q" htmlFor="qf-briefing">ME CONTE SOBRE O SEU PROJETO.</label>
         <textarea id="qf-briefing" name="briefing" className="qform__briefing" placeholder="Contexto, objetivo, referências — o que for relevante." aria-invalid={!!errors.briefing} />
