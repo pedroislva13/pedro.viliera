@@ -6,6 +6,7 @@ type Status = 'idle' | 'sending' | 'success' | 'error';
 
 // ✏️ PEDRO — opções dos selects. Edite livremente.
 const PROJECT_TYPES = ['Branding', 'Social Media', 'Site / Digital', 'Fotografia', 'Vídeo / Motion', 'Outro'];
+const SERVICES = ['Identidade visual', 'Social media', 'Direção de arte', 'Design gráfico', 'Fotografia', 'Vídeo', 'Criação de conteúdo', 'Estratégia de marca'];
 const BUDGETS = ['Até R$ 1.000', 'R$ 1.000 – R$ 3.000', 'R$ 3.000 – R$ 8.000', 'Acima de R$ 8.000', 'Prefiro conversar'];
 
 // Formulário de orçamento do Contact — layout editorial, uma pergunta grande por vez.
