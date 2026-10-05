@@ -48,7 +48,7 @@ export const areas = [
 
 export const homeBlocks = [
   {
-    image: '/images/home/pedro-01.jpg',
+    image: '/images/home/pedro-01.JPG',
     alt: 'Retrato de Pedro Vileira',
     label: 'QUEM SOU',
     title: 'Estratégia, estética, narrativa e execução.',
