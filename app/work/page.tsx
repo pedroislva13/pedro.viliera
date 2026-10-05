@@ -4,6 +4,7 @@ import { TextReveal } from '@/components/TextReveal';
 import { WorkList } from '@/components/WorkList';
 import { ProjectCard } from '@/components/ProjectCard';
 import { ClosingCTA } from '@/components/ClosingCTA';
+import { ChaosText } from '@/components/ContactHeroTitle';
 
 export const metadata: Metadata = { title: 'Work', description: 'Projetos selecionados de Pedro Vileira.' };
 
