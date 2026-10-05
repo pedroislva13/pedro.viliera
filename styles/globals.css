@@ -329,3 +329,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (hover: hover) { .qform__chip:hover span { border-color: var(--color-text); } }
 .qform__chip input:checked + span { background: var(--color-text); color: var(--color-background); border-color: var(--color-text); }
 .qform__chip input:focus-visible + span { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.footer__name {
+  grid-column: 1 / -1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
