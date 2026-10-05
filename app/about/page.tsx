@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
 import { ChaosText } from '@/components/ContactHeroTitle';
 
-export const metadata: Metadata = { title: 'About', description: siteConfig.bio };
+export const metadata: Metadata = { title: 'Sobre', description: siteConfig.bio };
 
 export default function About() {
   return (
