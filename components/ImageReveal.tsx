@@ -3,6 +3,7 @@
 import { useInView } from '@/lib/hooks';
 import { Media } from './Media';
 
+// Máscara abre de cima para baixo enquanto a imagem desce de scale 1.25 → 1.
 export function ImageReveal({
   src,
   alt,
@@ -18,7 +19,7 @@ export function ImageReveal({
   sizes?: string;
   className?: string;
 }) {
-  const { ref, on } = useInView();
+  const { ref, on } = useInView<HTMLDivElement>();
 
   return (
     <div
