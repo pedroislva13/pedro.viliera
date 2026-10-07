@@ -28,7 +28,7 @@ export const siteConfig = {
 export const socials = [
   { label: 'INSTAGRAM', href: siteConfig.instagram },
   { label: 'LINKEDIN', href: siteConfig.linkedin },
-  { label: 'E-MAIL', href: siteConfig.email },
+  { label: 'E-MAIL', href: `mailto:${siteConfig.email}` },
   { label: 'BEHANCE', href: siteConfig.behance },
   { label: 'WHATSAPP', href: siteConfig.whatsapp },
 ].filter((s) => s.href);
