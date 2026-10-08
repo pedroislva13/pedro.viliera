@@ -1,8 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-// ✏️ PEDRO: troque o texto de cada adesivo aqui
-const STICKERS = [
+export type StickerDef = { id: string; label: string; cls: string };
+// ✏️ PEDRO: troque o texto de cada adesivo aqui (usado na Home; outras páginas podem passar seu próprio conjunto)
+const DEFAULT_STICKERS: StickerDef[] = [
   { id: 'a', label: 'PENSE', cls: 'sticker--a' },
   { id: 'b', label: 'CRIE', cls: 'sticker--b' },
   { id: 'c', label: 'FLUA', cls: 'sticker--c' },
@@ -10,18 +11,19 @@ const STICKERS = [
 
 const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
 
-// Adesivos decorativos do Hero da Home. Surgem ao carregar a página, são arrastáveis e "escorregam"
-// um pouquinho sozinhos ao soltar, antes de parar. A posição arrastada não é salva ao recarregar.
-export function HeroStickers() {
+// Adesivos decorativos, arrastáveis, com "escorregão" ao soltar. Usados na Home com o texto padrão
+// (PENSE/CRIE/FLUA); outras páginas (como a 404) podem passar `stickers` com textos próprios,
+// reaproveitando o mesmo sistema em vez de duplicá-lo.
+export function HeroStickers({ stickers = DEFAULT_STICKERS }: { stickers?: StickerDef[] }) {
   const [pos, setPos] = useState<Record<string, { x: number; y: number }>>({});
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [settlingId, setSettlingId] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false); // dispara a animação de entrada
+  const [mounted, setMounted] = useState(false);
   const drag = useRef<{ id: string; sx: number; sy: number; ox: number; oy: number } | null>(null);
-  const lastMove = useRef({ x: 0, y: 0 }); // última velocidade do ponteiro, usada no "escorregão" ao soltar
+  const lastMove = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 60); // pequeno atraso garante que a transição de entrada rode
+    const t = setTimeout(() => setMounted(true), 60);
     return () => clearTimeout(t);
   }, []);
 
@@ -61,7 +63,7 @@ export function HeroStickers() {
 
   return (
     <>
-      {STICKERS.map((s, i) => {
+      {stickers.map((s, i) => {
         const o = pos[s.id] ?? { x: 0, y: 0 };
         return (
           <span
