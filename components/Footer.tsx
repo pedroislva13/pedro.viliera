@@ -4,7 +4,7 @@ import { ChaosText } from '@/components/ContactHeroTitle';
 export function Footer() {
   return (
     <footer className="footer grid">
-      <p className="t-subtitle c-wide footer__name">
+      <p className="t-subtitle footer__name">
         <ChaosText lines={[siteConfig.name]} />
       </p>
 
