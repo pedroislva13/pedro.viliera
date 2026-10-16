@@ -337,20 +337,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   align-items: center;
 }
 
+
 .footer__name {
   grid-column: 2 / span 8;
-  width: 100%;
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   text-align: left;
-  justify-self: stretch;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .footer__name {
     grid-column: 1 / -1;
-    padding-left: 24px;
-    padding-right: 24px;
+    margin-left: 24px;
+    width: fit-content;
   }
 }
