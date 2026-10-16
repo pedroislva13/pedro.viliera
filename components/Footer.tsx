@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="footer grid">
       <p className="t-subtitle c-wide footer__name">
-        <ChaosText text={siteConfig.name} />
+        <ChaosText lines={[siteConfig.name]} />
       </p>
 
       <ul className="footer__social c-right t-micro">
