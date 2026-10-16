@@ -8,7 +8,7 @@ export const siteConfig = {
   approach: 'Estratégia, estética, narrativa e execução — nessa ordem, sempre. Penso o projeto inteiro antes de abrir qualquer programa.', // ✏️ PEDRO: ALTERE COMO VOCÊ DESCREVE SEU PROCESSO AQUI
   location: 'SÃO JOSÉ DOS CAMPOS, BR', // ✏️ PEDRO: ALTERE SUA LOCALIZAÇÃO AQUI
   email: 'contato@pedrovileira.com', // ✏️ PEDRO: ALTERE O E-MAIL AQUI
-  instagram: 'https://instagram.com/pdrovileira', // ✏️ PEDRO: ALTERE O LINK DO INSTAGRAM AQUI
+  instagram: 'https://instagram.com/pedrovileira.std', // ✏️ PEDRO: ALTERE O LINK DO INSTAGRAM AQUI
   linkedin: 'https://www.linkedin.com/in/pedro-vileira-0b10b9441', // ✏️ PEDRO: SEU LINKEDIN (deixe '' se ainda não tiver — some do site sozinho)
   behance: 'https://www.behance.net/pedrovileira', // ✏️ PEDRO: SEU BEHANCE (deixe '' se ainda não tiver — some do site sozinho)
   whatsapp: 'https://wa.me/5512996853826', // ✏️ PEDRO: ALTERE O WHATSAPP AQUI (formato wa.me/55DDDNUMERO)
