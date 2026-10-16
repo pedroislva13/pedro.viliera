@@ -77,8 +77,37 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .cursor { position: fixed; top: 0; left: 0; z-index: var(--z-cursor); pointer-events: none; display: none; }
 .has-cursor .cursor { display: block; }
 .has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
-.cursor__dot { width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: var(--color-text); mix-blend-mode: difference; display: grid; place-content: center; color: #000; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; transform: scale(0.12); transition: transform var(--dur-fast) var(--ease); }
-.cursor[data-state='link'] .cursor__dot { transform: scale(0.32); }
+.cursor__dot {
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: normal;
+  display: grid;
+  place-content: center;
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  transform: scale(0.12);
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+/* Tema escuro: cursor branco */
+html:not([data-theme='light']) .cursor__dot {
+  background: #fff;
+  color: #000;
+}
+
+/* Tema claro: cursor preto */
+html[data-theme='light'] .cursor__dot {
+  background: #000;
+  color: #fff;
+}
 .cursor[data-state='view'] .cursor__dot, .cursor[data-state='drag'] .cursor__dot { transform: scale(1); }
 
 /* ===== NAV / MENU ===== */
