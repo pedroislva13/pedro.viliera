@@ -73,46 +73,69 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tt { position: fixed; inset: 0; z-index: var(--z-transition); background: var(--color-text); color: var(--color-background); display: flex; align-items: flex-end; padding: var(--margin); clip-path: inset(100% 0 0 0); pointer-events: none; }
 .tt__label { text-transform: uppercase; }
 
+
 /* ===== CURSOR ===== */
-.cursor { position: fixed; top: 0; left: 0; z-index: var(--z-cursor); pointer-events: none; display: none; }
-.has-cursor .cursor { display: block; }
-.has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  display: none;
+}
+
+.has-cursor .cursor {
+  display: block;
+}
+
+.has-cursor,
+.has-cursor a,
+.has-cursor button {
+  cursor: none;
+}
+
 .cursor__dot {
   width: 96px;
   height: 96px;
   margin: -48px 0 0 -48px;
   border-radius: 50%;
+
   background: #fff;
-  mix-blend-mode: normal;
+  color: #000;
+
   display: grid;
   place-content: center;
-  color: #000;
+
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
+
   transform: scale(0.12);
   transition:
-    background-color var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease),
     transform var(--dur-fast) var(--ease);
-}
-.cursor__dot {
+
+  /* Inverte visualmente as cores do fundo */
   mix-blend-mode: difference;
-  background-color: white;
 }
 
-/* Tema escuro: cursor branco */
+/* Mantém o cursor independente do tema */
+html[data-theme='light'] .cursor__dot,
 html:not([data-theme='light']) .cursor__dot {
   background: #fff;
   color: #000;
 }
 
-/* Tema claro: cursor preto */
-html[data-theme='light'] .cursor__dot {
-  background: #000;
-  color: #fff;
+/* Estados especiais */
+.cursor[data-state='view'] .cursor__dot,
+.cursor[data-state='drag'] .cursor__dot {
+  transform: scale(1);
 }
-.cursor[data-state='view'] .cursor__dot, .cursor[data-state='drag'] .cursor__dot { transform: scale(1); }
+
+.cursor[data-state='image'] .cursor__dot {
+  transform: scale(0);
+}
+
 
 /* ===== NAV / MENU ===== */
 .nav { position: fixed; inset: 0 0 auto 0; z-index: var(--z-nav); display: flex; justify-content: space-between; align-items: center; padding: var(--margin); mix-blend-mode: difference; color: #fff; font-size: var(--fs-micro); letter-spacing: 0.08em; font-weight: 600; }
