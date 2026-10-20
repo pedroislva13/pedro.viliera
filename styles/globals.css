@@ -331,7 +331,6 @@ html:not([data-theme='light']) .cursor__dot {
 }
 /* Elementos com cor fixa no tema escuro: no claro, adaptam */
 :root[data-theme='light'] .fallback, :root[data-theme='light'] .wl-preview__in { background: #ececea; }
-:root[data-theme='light'] .cursor__dot { background: #f2efe9; } /* com mix-blend "difference", a bolinha clara vira escura sobre o fundo branco */
 
 /* Botão do tema — canto inferior direito; usa "difference" como o menu do topo, então fica legível sobre qualquer fundo */
 .theme-toggle {
